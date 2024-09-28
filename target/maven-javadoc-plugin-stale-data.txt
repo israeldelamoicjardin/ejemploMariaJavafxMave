@@ -1,0 +1,48 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+@argfile
+--class-path
+'C:/Users/israel/.m2/repository/org/mariadb/jdbc/mariadb-java-client/3.4.1/mariadb-java-client-3.4.1.jar;C:/Users/israel/.m2/repository/com/github/waffle/waffle-jna/3.3.0/waffle-jna-3.3.0.jar;C:/Users/israel/.m2/repository/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar;C:/Users/israel/.m2/repository/net/java/dev/jna/jna-platform/5.13.0/jna-platform-5.13.0.jar;C:/Users/israel/.m2/repository/org/slf4j/jcl-over-slf4j/2.0.7/jcl-over-slf4j-2.0.7.jar;C:/Users/israel/.m2/repository/org/slf4j/slf4j-api/2.0.7/slf4j-api-2.0.7.jar;C:/Users/israel/.m2/repository/com/github/ben-manes/caffeine/caffeine/2.9.3/caffeine-2.9.3.jar;C:/Users/israel/.m2/repository/com/google/errorprone/error_prone_annotations/2.10.0/error_prone_annotations-2.10.0.jar;C:/Users/israel/.m2/repository/org/checkerframework/checker-qual/3.32.0/checker-qual-3.32.0.jar;C:/Users/israel/.m2/repository/org/openjfx/javafx-controls/22-ea+11/javafx-controls-22-ea+11.jar;C:/Users/israel/.m2/repository/org/openjfx/javafx-graphics/22-ea+11/javafx-graphics-22-ea+11.jar;C:/Users/israel/.m2/repository/org/openjfx/javafx-base/22-ea+11/javafx-base-22-ea+11.jar;C:/Users/israel/.m2/repository/org/openjfx/javafx-fxml/22-ea+11/javafx-fxml-22-ea+11.jar'
+--module-path
+'C:/Users/israel/.m2/repository/org/openjfx/javafx-fxml/22-ea+11/javafx-fxml-22-ea+11-win.jar;C:/Users/israel/.m2/repository/org/openjfx/javafx-controls/22-ea+11/javafx-controls-22-ea+11-win.jar;D:/proyectos/proyectos/demoMARIADB/target/classes;C:/Users/israel/.m2/repository/org/openjfx/javafx-graphics/22-ea+11/javafx-graphics-22-ea+11-win.jar;C:/Users/israel/.m2/repository/org/openjfx/javafx-base/22-ea+11/javafx-base-22-ea+11-win.jar'
+--patch-module
+es.israeldelamo.demomariadb='D:/proyectos/proyectos/demoMARIADB/src/main/java'
+-encoding
+'UTF-8'
+-private
+--module-source-path
+'D:/proyectos/proyectos/demoMARIADB/target/reports/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/proyectos/proyectos/demoMARIADB/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'demoMARIADB 1.0-SNAPSHOT API'
+-nohelp
+-use
+-version
+-windowtitle
+'demoMARIADB 1.0-SNAPSHOT API'
+es.israeldelamo.demomariadb.controladores
+es.israeldelamo.demomariadb.dao
+es.israeldelamo.demomariadb
+'D:/proyectos/proyectos/demoMARIADB/src/main/java/module-info.java'
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\allclasses-index.html = 1727551176419
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\allpackages-index.html = 1727551176421
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\element-list = 1727551176289
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\index-all.html = 1727551176432
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\index.html = 1727551176437
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\member-search-index.js = 1727551176424
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\module-search-index.js = 1727551176422
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\overview-tree.html = 1727551176401
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\package-search-index.js = 1727551176423
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\search.html = 1727551176434
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\tag-search-index.js = 1727551176424
+D:\proyectos\proyectos\demoMARIADB\target\reports\apidocs\type-search-index.js = 1727551176423

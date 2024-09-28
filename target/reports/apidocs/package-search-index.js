@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"es.israeldelamo.demomariadb","l":"es.israeldelamo.demomariadb"},{"m":"es.israeldelamo.demomariadb","l":"es.israeldelamo.demomariadb.controladores"},{"m":"es.israeldelamo.demomariadb","l":"es.israeldelamo.demomariadb.dao"}];updateSearchResults();

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"es.israeldelamo.demomariadb.dao","l":"DaoDni"},{"p":"es.israeldelamo.demomariadb","l":"HelloApplication"},{"p":"es.israeldelamo.demomariadb.controladores","l":"HelloController"}];updateSearchResults();
