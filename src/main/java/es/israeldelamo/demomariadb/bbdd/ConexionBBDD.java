@@ -1,5 +1,7 @@
 package es.israeldelamo.demomariadb.bbdd;
 
+import es.israeldelamo.demomariadb.util.Propiedades;
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -20,12 +22,15 @@ import java.util.Properties;
          * @throws java.sql.SQLException Hay que controlar errores de SQL
          */
         public ConexionBBDD() throws SQLException {
-            // los parametros de la conexion
+            // los parametros de la conexion leidos desde fuera
+            String user = Propiedades.getValor("user");
+            String password = Propiedades.getValor("password");
+            // las propiedades de la conexión
             Properties connConfig = new Properties();
-            connConfig.setProperty("user", "myuser");
-            connConfig.setProperty("password", "mypass");
+            connConfig.setProperty("user", user);
+            connConfig.setProperty("password", password);
             //la conexion en sí
-            conexion = DriverManager.getConnection("jdbc:mariadb://192.168.0.149/PERSONAS?serverTimezone=Europe/Madrid", connConfig);
+            conexion = DriverManager.getConnection("jdbc:mariadb://localhost/mydb?serverTimezone=Europe/Madrid", connConfig);
             conexion.setAutoCommit(true);
             DatabaseMetaData databaseMetaData = conexion.getMetaData();
             //debug
