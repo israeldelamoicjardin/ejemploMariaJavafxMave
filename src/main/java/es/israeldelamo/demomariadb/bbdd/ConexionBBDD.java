@@ -1,13 +1,16 @@
 package es.israeldelamo.demomariadb.bbdd;
 
 import es.israeldelamo.demomariadb.util.Propiedades;
+import org.checkerframework.checker.units.qual.C;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-    /**
+import java.util.concurrent.CompletableFuture;
+
+/**
      * Clase de conexión a la bbdd
      *
      * @author israel
@@ -15,6 +18,12 @@ import java.util.Properties;
      */
     public class ConexionBBDD {
         private final Connection conexion;
+
+
+    private Properties connConfig = new Properties();
+
+
+
 
         /**
          * Es el constructor que se llama al crear un objeto de esta clase, lanzado la conexión
@@ -26,11 +35,11 @@ import java.util.Properties;
             String user = Propiedades.getValor("user");
             String password = Propiedades.getValor("password");
             // las propiedades de la conexión
-            Properties connConfig = new Properties();
+            connConfig = new Properties();
             connConfig.setProperty("user", user);
             connConfig.setProperty("password", password);
             //la conexion en sí
-            conexion = DriverManager.getConnection("jdbc:mariadb://localhost/mydb?serverTimezone=Europe/Madrid", connConfig);
+            conexion = DriverManager.getConnection("jdbc:mariadb://localhost/DNI", connConfig);
             conexion.setAutoCommit(true);
             DatabaseMetaData databaseMetaData = conexion.getMetaData();
             //debug
@@ -64,5 +73,37 @@ import java.util.Properties;
             conexion.close();
             return conexion;
         }
+
+
+
+        public CompletableFuture<Connection> getConexionAsync() {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return DriverManager.getConnection("jdbc:mariadb://localhost/mydb?serverTimezone=Europe/Madrid", connConfig);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
+    public CompletableFuture<Void> CloseConexionAsync() {
+        return CompletableFuture.runAsync(() -> {
+            try {
+                conexion.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+//
+//    public static void main(String[] args) {
+//        try {
+//            ConexionBBDD conexiontest = new ConexionBBDD();
+//        } catch (SQLException e) {
+//            System.out.println("error de conexion");
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
     }
 

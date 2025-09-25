@@ -38,8 +38,17 @@ public class HelloController {
      * Boton para cambiar el texto de hola mundo
      */
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+       // welcomeText.setText("Welcome to JavaFX Application!");
+        rellenarTabla();
 
+    }
+
+    public void initialize() {
+
+        rellenarTabla();
+    }
+
+    private void rellenarTabla(){
         //   DaoDni daoDNI = new DaoDNI(); como es estático, lo creo y destruyo en la misma llamada
         //formateo la columna
         tcDni.setCellValueFactory(new PropertyValueFactory<>("dni"));

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.CompletableFuture;
 
 public class DaoDni {
 
@@ -21,9 +22,12 @@ public class DaoDni {
         public static ObservableList<ModeloPersona> cargarListadoDNI() {
             ConexionBBDD conexion;
             ObservableList<ModeloPersona> listadoDePersonas= FXCollections.observableArrayList();
+            System.out.println("Cargando listado de DNI");
 
             try{
                 conexion = new ConexionBBDD();
+
+
 
                 String consulta = "SELECT dni FROM DNI";
                 PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
@@ -31,6 +35,7 @@ public class DaoDni {
                 while (rs.next()) {
                     String dni = rs.getString("dni");
                     ModeloPersona mp = new ModeloPersona(dni);
+                    System.out.println("Nuevo dni leido");
                     listadoDePersonas.add(mp);
 
                 }
@@ -165,6 +170,112 @@ public class DaoDni {
                 return false;
             }
         }
+
+
+
+
+
+    // Cargar listado DNI
+    public static CompletableFuture<ObservableList<ModeloPersona>> cargarListadoDNIAsync() {
+        return CompletableFuture.supplyAsync(() -> {
+            ConexionBBDD conexion;
+            ObservableList<ModeloPersona> listadoDePersonas = FXCollections.observableArrayList();
+
+            try {
+                conexion = new ConexionBBDD();
+                String consulta = "SELECT dni FROM DNI";
+                PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    String dni = rs.getString("dni");
+                    ModeloPersona mp = new ModeloPersona(dni);
+                    listadoDePersonas.add(mp);
+                }
+                rs.close();
+                conexion.CloseConexionAsync().join();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return listadoDePersonas;
+        });
+    }
+
+    // Modificar DNI
+    public static CompletableFuture<Boolean> modificarPaisAsync(ModeloPersona dni, String nuevoDni) {
+        return CompletableFuture.supplyAsync(() -> {
+            ConexionBBDD conexion;
+            PreparedStatement pstmt;
+
+            try {
+                conexion = new ConexionBBDD();
+                String consulta = "UPDATE DNI SET dni = ? WHERE dni = ?";
+                pstmt = conexion.getConexion().prepareStatement(consulta);
+                pstmt.setString(1, nuevoDni);
+                pstmt.setString(2, dni.getDni());
+
+                int filasAfectadas = pstmt.executeUpdate();
+                pstmt.close();
+                conexion.CloseConexionAsync().join();
+                return filasAfectadas > 0;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        });
+    }
+
+    // Crear nuevo DNI
+    public static CompletableFuture<Boolean> nuevoDNIAsync(ModeloPersona persona) {
+        return CompletableFuture.supplyAsync(() -> {
+            ConexionBBDD conexion;
+            PreparedStatement pstmt;
+
+            try {
+                conexion = new ConexionBBDD();
+                String consulta = "INSERT INTO DNI (dni) VALUES (?)";
+                pstmt = conexion.getConexion().prepareStatement(consulta);
+                pstmt.setString(1, persona.getDni());
+
+                int filasAfectadas = pstmt.executeUpdate();
+                pstmt.close();
+                conexion.CloseConexionAsync().join();
+                return filasAfectadas > 0;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        });
+    }
+
+    // Eliminar persona
+    public static CompletableFuture<Boolean> eliminarPersonaAsync(ModeloPersona personaAEliminar) {
+        return CompletableFuture.supplyAsync(() -> {
+            ConexionBBDD conexion;
+            PreparedStatement pstmt;
+
+            try {
+                conexion = new ConexionBBDD();
+                String consulta = "DELETE FROM DNI WHERE (dni = ?)";
+                pstmt = conexion.getConexion().prepareStatement(consulta);
+                pstmt.setString(1, personaAEliminar.getDni());
+                int filasAfectadas = pstmt.executeUpdate();
+                pstmt.close();
+                conexion.CloseConexionAsync().join();
+                return filasAfectadas > 0;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        });
+    }
+
+//
+//    public static void main(String[] args) {
+//        System.out.println(
+//            DaoDni.cargarListadoDNI()
+//                    );
+//    }
+
 
     }
 
