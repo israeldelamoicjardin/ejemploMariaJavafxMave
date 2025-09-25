@@ -3,6 +3,7 @@ package es.israeldelamo.demomariadb.util;
 
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -17,9 +18,10 @@ public class Propiedades {
     static {
 
         //	try (FileInputStream input = new FileInputStream(new File(System.getProperty("user.dir") + "\\configuration.properties"))){
-        try(FileInputStream input = new FileInputStream("src/main/resources/es/israeldelamo/demomariadb/configuration.properties")){
-
-
+        try(
+                InputStream input = Propiedades.class.getResourceAsStream
+                ("/es/israeldelamo/demomariadb/configuration.properties")
+        ){
             props.load(input);
         } catch (Exception e) {
 
