@@ -29,13 +29,16 @@ public class DaoDni {
 
 
 
-                String consulta = "SELECT dni FROM DNI";
+                String consulta = "SELECT dni, nombre, apellidos FROM DNI";
                 PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     String dni = rs.getString("dni");
-                    ModeloPersona mp = new ModeloPersona(dni);
-                    System.out.println("Nuevo dni leido");
+                    String nombre = rs.getString("nombre");
+                    String apellidos = rs.getString("apellidos");
+
+                    ModeloPersona mp = new ModeloPersona(dni,nombre,apellidos);
+                    System.out.println("Nuevo dni leido= "+ dni+" "+nombre+" "+apellidos);
                     listadoDePersonas.add(mp);
 
                 }

@@ -32,9 +32,63 @@ public class ModeloPersona {
         this.dni = dni;
     }
 
+
+    /**
+     * Constructor con todos los parámetros del modelo
+     * @param dni
+     * @param nombre
+     * @param apellidos
+     */
+    public ModeloPersona(String dni, String nombre, String apellidos) {
+        setDni(dni);
+        setNombre(nombre);
+       setApellidos(apellidos);
+    }
+
     /**
      * El valor de DNI de la persona
      */
     private String dni;
+
+    /**
+     * Devuelve el nombre
+     * @return
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Asigna el nombre
+     * @param nombre
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Devuelve el apellido
+     * @return
+     */
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    /**
+     * Asigna un apellido
+     * @param apellidos
+     */
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    /**
+     * El valor de nombre
+     */
+    private String nombre;
+    /**
+     * El valor de apellidos
+     */
+    private String apellidos;
 
 }

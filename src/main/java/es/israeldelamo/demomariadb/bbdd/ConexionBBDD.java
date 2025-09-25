@@ -2,6 +2,8 @@ package es.israeldelamo.demomariadb.bbdd;
 
 import es.israeldelamo.demomariadb.util.Propiedades;
 import org.checkerframework.checker.units.qual.C;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -19,6 +21,7 @@ import java.util.concurrent.CompletableFuture;
     public class ConexionBBDD {
         private final Connection conexion;
 
+    private static final Logger logger = LoggerFactory.getLogger(ConexionBBDD.class);
 
     private Properties connConfig = new Properties();
 
@@ -51,6 +54,7 @@ import java.util.concurrent.CompletableFuture;
             System.out.printf("  Versión: %s%n", databaseMetaData.getDriverVersion());
             System.out.println("----------------------------------------------------------------");
             System.out.println();
+            logger.info("Conectado a la base de datos");
             conexion.setAutoCommit(true);
         }
 

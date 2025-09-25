@@ -4,6 +4,7 @@ module es.israeldelamo.demomariadb {
     requires java.sql;
     requires javafx.base;
     requires org.checkerframework.checker.qual;
+    requires org.slf4j;
 
 
     opens es.israeldelamo.demomariadb to javafx.fxml;
