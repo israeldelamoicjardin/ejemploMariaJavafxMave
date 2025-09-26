@@ -2,6 +2,7 @@ package es.israeldelamo.demomariadb.dao;
 
 import es.israeldelamo.demomariadb.bbdd.ConexionBBDD;
 import es.israeldelamo.demomariadb.modelos.ModeloPersona;
+import es.israeldelamo.demomariadb.util.Alertas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.slf4j.Logger;
@@ -49,14 +50,15 @@ public class DaoDni {
                 conexion.CloseConexion();
             }catch (
                     SQLException e) {
-                // O lo trato aquí arriesgandome a qu fxml no este
+                // O lo trato aquí arriesgandome a que fxml no este
                 /*
                 Alertas alertaError = new Alertas();
                 alertaError.mostrarError("No he podido cargar el listado de paises");
                 alertaError.mostrarError(e.getMessage());
                 */
                 // o lo trato aquí mostrandolo por consola
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
+                log.error("No he podido cargar la lista sincrona {}",e.getMessage());
             }
             return listadoDePersonas;
         }
@@ -84,17 +86,17 @@ public class DaoDni {
 
                 int filasAfectadas = pstmt.executeUpdate();
 
-                System.out.println("Actualizada dnis");
+                log.info("Actualizada dnis");
                 //if (pstmt != null)
                 pstmt.close();
                 //if (conexion != null)
                 conexion.CloseConexion();
                 return filasAfectadas > 0;
             } catch (SQLException e) {
-               /* Alertas alertaError = new Alertas();
+                Alertas alertaError = new Alertas();
                 alertaError.mostrarError("No he podido cargar el listado de paises");
-                alertaError.mostrarError(e.getMessage());*/
-                System.out.println(e.getMessage());
+                alertaError.mostrarError(e.getMessage());
+                log.error("No he podido modificar el dni {}",e.getMessage());
                 return false;
 
             }
