@@ -2,6 +2,9 @@ package es.israeldelamo.demomariadb.controladores;
 
 import es.israeldelamo.demomariadb.dao.DaoDni;
 import es.israeldelamo.demomariadb.modelos.ModeloPersona;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -18,8 +21,7 @@ public class ControladorMuestraPersonas {
      */
     private ModeloPersona personaModelo;
 
-    @FXML
-    private Label welcomeText;
+
 
     /**
      * TAbla de personas
@@ -60,8 +62,10 @@ public class ControladorMuestraPersonas {
      * Se dispara cada vez que se carga la ventana
      */
     public void initialize() {
-
-        rellenarTabla();
+//cuando la queremos async
+        rellenarTablaAsync();
+      // cuando la queremos sync
+        //  rellenarTabla();
     }
 
 
@@ -89,22 +93,27 @@ public class ControladorMuestraPersonas {
      * a através del su DAO async
      */
     private void rellenarTablaAsync(){
-        //        ObservableList<ModeloPersona> listadoDePersonas= FXCollections.observableArrayList();
-//
-//        ModeloPersona personaPrueba = new ModeloPersona("6969");
-//        //parte de la pruebas con Asyncrono
-//        DaoDni.cargarListadoDNIAsync().thenAccept(listado -> {
-//            // Utiliza el listado de personas aquí
-//            System.out.println(listadoDePersonas);
-//        });
-//        //y modifica
-//        DaoDni.modificarPaisAsync(personaPrueba, "NuevoDni").thenAccept(exito -> {
-//            // Maneja el éxito o fracaso
-//            if (exito) {
-//                System.out.println("Modificación exitosa");
-//            } else {
-//                System.out.println("Error al modificar");
-//            }
-//        });
+                ObservableList<ModeloPersona> listadoDePersonas= FXCollections.observableArrayList();
+        tcDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
+        tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        tcApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        //limpio la tabla de mierdas
+        tvDni.getItems().clear();
+        //añado las entradas mediante un listao de dnis
+
+
+        DaoDni.cargarListadoDNIAsync().thenAccept(listado -> {
+            // Utiliza el listado de personas aquí
+            // Asegúrate de que el acceso a elementos de la UI se haga en el hilo de JavaFX
+            Platform.runLater(() -> {
+                listadoDePersonas.addAll(listado);
+                tvDni.setItems(listadoDePersonas);
+                tvDni.refresh();
+            });
+
+        });
+
     }
+
+
 }
