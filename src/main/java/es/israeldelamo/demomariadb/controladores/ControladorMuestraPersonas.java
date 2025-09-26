@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,14 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 
 public class ControladorMuestraPersonas {
-    /**
-     * La persona que va a ser referenciada para crear la tabla
-     */
-    private ModeloPersona personaModelo;
-
-
-
-    /**
+       /**
      * TAbla de personas
      */
     @FXML
@@ -50,21 +42,19 @@ public class ControladorMuestraPersonas {
 
     @FXML
     /**
-     * Boton para rellenar la tabla
+     * Botón para rellenar la tabla
      */
     protected void onHelloButtonClick() {
-       // welcomeText.setText("Welcome to JavaFX Application!");
         rellenarTabla();
-
     }
 
     /**
      * Se dispara cada vez que se carga la ventana
      */
     public void initialize() {
-//cuando la queremos async
+        //cuando la queremos async
         rellenarTablaAsync();
-      // cuando la queremos sync
+        // cuando la queremos sync
         //  rellenarTabla();
     }
 
@@ -81,7 +71,7 @@ public class ControladorMuestraPersonas {
         tcApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         //limpio la tabla de mierdas
         tvDni.getItems().clear();
-        //añado las entradas mediante un listao de dnis
+        //añado las entradas mediante un listado de dnis
         tvDni.getItems().addAll(DaoDni.cargarListadoDNI());
         //refresco la tabla
         tvDni.refresh();
@@ -89,28 +79,27 @@ public class ControladorMuestraPersonas {
 
 
     /**
-     * Rellena la tabla  de Personas pero haciendo una llamda asincrona a la base de datos
-     * a através del su DAO async
+     * Rellena la tabla de Personas pero haciendo una llamda asincrona a la base de datos
+     * a través del su DAO async
      */
     private void rellenarTablaAsync(){
-                ObservableList<ModeloPersona> listadoDePersonas= FXCollections.observableArrayList();
+        ObservableList<ModeloPersona> listadoDePersonas= FXCollections.observableArrayList();
         tcDni.setCellValueFactory(new PropertyValueFactory<>("dni"));
         tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tcApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         //limpio la tabla de mierdas
         tvDni.getItems().clear();
-        //añado las entradas mediante un listao de dnis
 
-
+        //añado las entradas mediante un listado de dnis
         DaoDni.cargarListadoDNIAsync().thenAccept(listado -> {
             // Utiliza el listado de personas aquí
             // Asegúrate de que el acceso a elementos de la UI se haga en el hilo de JavaFX
+            //aquí reside la mágia de lo asíncrono
             Platform.runLater(() -> {
                 listadoDePersonas.addAll(listado);
                 tvDni.setItems(listadoDePersonas);
                 tvDni.refresh();
             });
-
         });
 
     }
