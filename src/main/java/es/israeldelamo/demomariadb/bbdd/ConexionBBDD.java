@@ -1,10 +1,11 @@
 package es.israeldelamo.demomariadb.bbdd;
 
 import es.israeldelamo.demomariadb.util.Propiedades;
-import org.checkerframework.checker.units.qual.C;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.management.MBeanAttributeInfo;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -19,8 +20,15 @@ import java.util.concurrent.CompletableFuture;
      * @version $Id: $Id
      */
     public class ConexionBBDD {
-        private final Connection conexion;
 
+    /**
+     * Objeto de conexion
+     */
+    private final Connection conexion;
+
+    /**
+     * Objeto para el logueo de las activiades de esta clase
+     */
     private static final Logger logger = LoggerFactory.getLogger(ConexionBBDD.class);
 
     private Properties connConfig = new Properties();
@@ -34,7 +42,8 @@ import java.util.concurrent.CompletableFuture;
          * @throws java.sql.SQLException Hay que controlar errores de SQL
          */
         public ConexionBBDD() throws SQLException {
-            // los parametros de la conexion leidos desde fuera
+            // los parámetros de la conexion leidos desde fuera
+            // nada de dejar en el repo las credenciales
             String user = Propiedades.getValor("user");
             String password = Propiedades.getValor("password");
             // las propiedades de la conexión
@@ -42,18 +51,20 @@ import java.util.concurrent.CompletableFuture;
             connConfig.setProperty("user", user);
             connConfig.setProperty("password", password);
             //la conexion en sí
-            conexion = DriverManager.getConnection("jdbc:mariadb://localhost/DNI", connConfig);
+            //usamos el driver de mariadb o el que toque
+            // sería interesante sacar fuera ese nombre del esquema
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/DNI", connConfig);
             conexion.setAutoCommit(true);
             DatabaseMetaData databaseMetaData = conexion.getMetaData();
             //debug
-            System.out.println();
-            System.out.println("--- Datos de conexión ------------------------------------------");
-            System.out.printf("Base de datos: %s%n", databaseMetaData.getDatabaseProductName());
-            System.out.printf("  Versión: %s%n", databaseMetaData.getDatabaseProductVersion());
-            System.out.printf("Driver: %s%n", databaseMetaData.getDriverName());
-            System.out.printf("  Versión: %s%n", databaseMetaData.getDriverVersion());
-            System.out.println("----------------------------------------------------------------");
-            System.out.println();
+//            System.out.println();
+//            System.out.println("--- Datos de conexión ------------------------------------------");
+//            System.out.printf("Base de datos: %s%n", databaseMetaData.getDatabaseProductName());
+//            System.out.printf("  Versión: %s%n", databaseMetaData.getDatabaseProductVersion());
+//            System.out.printf("Driver: %s%n", databaseMetaData.getDriverName());
+//            System.out.printf("  Versión: %s%n", databaseMetaData.getDriverVersion());
+//            System.out.println("----------------------------------------------------------------");
+//            System.out.println();
             logger.info("Conectado a la base de datos");
             conexion.setAutoCommit(true);
         }
@@ -79,12 +90,24 @@ import java.util.concurrent.CompletableFuture;
         }
 
 
-
+    /**
+     * Conexiones asíncronas, se establece mediante este procedimiento
+     * @return
+     */
         public CompletableFuture<Connection> getConexionAsync() {
             return CompletableFuture.supplyAsync(() -> {
                 try {
-                    return DriverManager.getConnection("jdbc:mariadb://localhost/mydb?serverTimezone=Europe/Madrid", connConfig);
+                    // los parámetros de la conexion leidos desde fuera
+                    // nada de dejar en el repo las credenciales
+                    String user = Propiedades.getValor("user");
+                    String password = Propiedades.getValor("password");
+                    // las propiedades de la conexión
+                    connConfig = new Properties();
+                    connConfig.setProperty("user", user);
+                    connConfig.setProperty("password", password);
+                    return DriverManager.getConnection("jdbc:mysql://localhost/DNI", connConfig);
                 } catch (SQLException e) {
+                    logger.error("Fallo en la conexión a bbdd asíncronamente {}", e.getMessage());
                     throw new RuntimeException(e);
                 }
             });
@@ -95,11 +118,13 @@ import java.util.concurrent.CompletableFuture;
             try {
                 conexion.close();
             } catch (SQLException e) {
+                logger.info("Cerrando la  base de datos asíncronamente {}", e.getMessage());
                 throw new RuntimeException(e);
+
             }
         });
     }
-//
+// PRUEBA PARA LLAMADA SÍNCRONA
 //    public static void main(String[] args) {
 //        try {
 //            ConexionBBDD conexiontest = new ConexionBBDD();
@@ -109,5 +134,8 @@ import java.util.concurrent.CompletableFuture;
 //        }
 //
 //    }
+
+
+
     }
 
