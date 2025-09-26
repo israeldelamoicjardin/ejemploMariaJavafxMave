@@ -31,7 +31,7 @@ import java.util.concurrent.CompletableFuture;
      */
     private static final Logger logger = LoggerFactory.getLogger(ConexionBBDD.class);
 
-    private Properties connConfig = new Properties();
+
 
 
 
@@ -42,6 +42,7 @@ import java.util.concurrent.CompletableFuture;
          * @throws java.sql.SQLException Hay que controlar errores de SQL
          */
         public ConexionBBDD() throws SQLException {
+            Properties connConfig = new Properties();
             // los parámetros de la conexion leidos desde fuera
             // nada de dejar en el repo las credenciales
             String user = Propiedades.getValor("user");
@@ -95,12 +96,15 @@ import java.util.concurrent.CompletableFuture;
      * @return
      */
         public CompletableFuture<Connection> getConexionAsync() {
+
             return CompletableFuture.supplyAsync(() -> {
                 try {
+                    Properties connConfig = new Properties();
                     // los parámetros de la conexion leidos desde fuera
                     // nada de dejar en el repo las credenciales
                     String user = Propiedades.getValor("user");
                     String password = Propiedades.getValor("password");
+                    // las propiedades de la conexión
                     // las propiedades de la conexión
                     connConfig = new Properties();
                     connConfig.setProperty("user", user);
