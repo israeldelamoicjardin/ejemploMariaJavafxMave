@@ -39,11 +39,10 @@ public class ControladorMuestraPersonas {
     @FXML
     private TableColumn<ModeloPersona, String> tcApellidos;
 
-
-    @FXML
     /**
-     * Botón para rellenar la tabla
+     * Procedimiento para rellenar la tabla
      */
+    @FXML
     protected void onHelloButtonClick() {
         rellenarTabla();
     }
