@@ -4,6 +4,8 @@ import es.israeldelamo.demomariadb.bbdd.ConexionBBDD;
 import es.israeldelamo.demomariadb.modelos.ModeloPersona;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +15,9 @@ import java.util.concurrent.CompletableFuture;
 public class DaoDni {
 
 
+    private static final Logger log = LoggerFactory.getLogger(DaoDni.class);
 
-        /**
+    /**
          * Metodo que carga los datos de la tabla DNI y los devuelve para usarlos en un listado de personas
          *
          * @return listado de paises para cargar en un tableview
@@ -58,11 +61,6 @@ public class DaoDni {
             return listadoDePersonas;
         }
 
-
-
-
-
-
         /**
          * Metodo que modifica los datos de un dni  en la BD
          *
@@ -70,13 +68,13 @@ public class DaoDni {
          * @param nuevoDni Nuevo dni de la persona a modificar
          * @return			true/false
          */
-        public static  boolean modificarPais(ModeloPersona dni, String nuevoDni) {
+
+        public static  boolean modificarDni(ModeloPersona dni, String nuevoDni) {
             ConexionBBDD conexion;
             PreparedStatement pstmt;
 
             try {
                 conexion = new ConexionBBDD();
-                // UPDATE `DNI`.`PAISES` SET `pais` = 'BulgariaK' WHERE (`pais` = 'Bulgaria');
 
                 String consulta = "UPDATE DNI SET dni = ? WHERE dni = ?";
                 pstmt = conexion.getConexion().prepareStatement(consulta);
@@ -102,8 +100,6 @@ public class DaoDni {
             }
 
         }
-
-
 
         /**
          * Metodo que CREA un nuevo un dni en la BD
@@ -175,10 +171,10 @@ public class DaoDni {
         }
 
 
-
-
-
-    // Cargar listado DNI
+    /**
+     * Carga de manera asinconrana el listado de personas
+     * @return la lista observable de personas DNI
+     */
     public static CompletableFuture<ObservableList<ModeloPersona>> cargarListadoDNIAsync() {
         return CompletableFuture.supplyAsync(() -> {
             ConexionBBDD conexion;
@@ -197,14 +193,19 @@ public class DaoDni {
                 rs.close();
                 conexion.CloseConexionAsync().join();
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                log.error("No he podido cargar la tabla {}", e.getMessage());
             }
             return listadoDePersonas;
         });
     }
 
-    // Modificar DNI
-    public static CompletableFuture<Boolean> modificarPaisAsync(ModeloPersona dni, String nuevoDni) {
+    /**
+     * Si le pasas un dni lo modifica, hay que solo modifica el número del dni
+     * @param dni a modificar
+     * @param nuevoDni a escribir, no verifica si hay colisión
+     * @return
+     */
+    public static CompletableFuture<Boolean> modificarDniAsync(ModeloPersona dni, String nuevoDni) {
         return CompletableFuture.supplyAsync(() -> {
             ConexionBBDD conexion;
             PreparedStatement pstmt;
@@ -221,13 +222,17 @@ public class DaoDni {
                 conexion.CloseConexionAsync().join();
                 return filasAfectadas > 0;
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                log.error("No he podido modificarlo {}", e.getMessage());
                 return false;
             }
         });
     }
 
-    // Crear nuevo DNI
+    /**
+     * Crea un nuevo DNI pero sin tener en cuenta su nombre y su apellido
+     * @param persona con los datos mínimos de su número de dni
+     * @return
+     */
     public static CompletableFuture<Boolean> nuevoDNIAsync(ModeloPersona persona) {
         return CompletableFuture.supplyAsync(() -> {
             ConexionBBDD conexion;
@@ -244,13 +249,17 @@ public class DaoDni {
                 conexion.CloseConexionAsync().join();
                 return filasAfectadas > 0;
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                log.error("No he podido crearlo {}",e.getMessage());
                 return false;
             }
         });
     }
 
-    // Eliminar persona
+    /**
+     * Elimina el registro de la bbdd que coincida con el dni que le pasamos
+     * @param personaAEliminar la persona a eliminar
+     * @return
+     */
     public static CompletableFuture<Boolean> eliminarPersonaAsync(ModeloPersona personaAEliminar) {
         return CompletableFuture.supplyAsync(() -> {
             ConexionBBDD conexion;
@@ -266,7 +275,7 @@ public class DaoDni {
                 conexion.CloseConexionAsync().join();
                 return filasAfectadas > 0;
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                log.error("No he podido eliminarlo {}",e.getMessage());
                 return false;
             }
         });
