@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.*?>
 
 <VBox alignment="CENTER" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.israeldelamo.demomariadb.controladores.ControladorMuestraPersonas">
     <padding>
@@ -17,7 +18,15 @@
     <Button onAction="#onHelloButtonClick" text="_Actualiza">
       <tooltip>
          <Tooltip text="Refresca la tabla inferior" />
-      </tooltip></Button>
+      </tooltip>
+      <graphic>
+
+      </graphic>
+      <graphic>
+         <FontIcon accessibleText="Actualizar" fontSmoothingType="LCD"
+                   iconColor="#8a2d2d" iconLiteral="fa-recycle" iconSize="20"
+                   selectionEnd="2" selectionFill="#1b293c" styleClass="h2" />
+      </graphic></Button>
    <TableView fx:id="tvDni" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="388.0" prefWidth="600.0" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
      <columns>
 
