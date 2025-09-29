@@ -13,6 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Dao para la tabla DNI
+ */
 public class DaoDni {
 
 
@@ -42,7 +45,7 @@ public class DaoDni {
                     String apellidos = rs.getString("apellidos");
 
                     ModeloPersona mp = new ModeloPersona(dni,nombre,apellidos);
-                    System.out.println("Nuevo dni leido= "+ dni+" "+nombre+" "+apellidos);
+                    //System.out.println("Nuevo dni leido= "+ dni+" "+nombre+" "+apellidos);
                     listadoDePersonas.add(mp);
 
                 }
@@ -163,11 +166,9 @@ public class DaoDni {
                 return filasAfectadas > 0;
 
             } catch (SQLException e) {
-                /*
                 Alertas alertaError = new Alertas();
                 alertaError.mostrarError("No he podido borrar ese registro");
-                alertaError.mostrarError(e.getMessage());*/
-                System.out.println(e.getMessage());
+                alertaError.mostrarError(e.getMessage());
                 return false;
             }
         }
