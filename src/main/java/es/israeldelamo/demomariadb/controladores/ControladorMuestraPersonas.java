@@ -2,6 +2,7 @@ package es.israeldelamo.demomariadb.controladores;
 
 import es.israeldelamo.demomariadb.dao.DaoDni;
 import es.israeldelamo.demomariadb.modelos.ModeloPersona;
+import es.israeldelamo.demomariadb.util.Alertas;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- * Una clase controladora de ejemplo
+ * Una clase controladora de ejemplo para muestraPersonas.fxml
  */
 
 public class ControladorMuestraPersonas {
@@ -57,7 +58,6 @@ public class ControladorMuestraPersonas {
         //  rellenarTabla();
     }
 
-
     /**
      * Rellena la tabla de personas pero usando una llamada sincrona a la base de datos
      * mediante su dao sin la palabra async
@@ -100,8 +100,15 @@ public class ControladorMuestraPersonas {
                 tvDni.refresh();
             });
         });
-
     }
 
 
+    /**
+     * Muestra una ventanita de información sobre el autor
+     */
+    @FXML
+    private void onAcercaDeClick() {
+        Alertas alertaAcercaDe = new Alertas();
+        alertaAcercaDe.mostrarInformacion("Version 1.0 de la demo");
+    }
 }
