@@ -34,7 +34,7 @@ public class AdministradorPersonas extends Application {
 //
 //
 //        } catch (SQLException e) {
-//            //todo hay que tratar esta excepción
+//
 //            throw new RuntimeException(e);
 //        }
 
@@ -54,7 +54,7 @@ public class AdministradorPersonas extends Application {
         stage.setScene(scene);
         stage.show();
         Alertas alertaInformacion = new Alertas();
-        alertaInformacion.mostrarInformacion("He cargado la ventana con éxito");
+        alertaInformacion.mostrarInformacion("Bienvenido a la gestión de DNIs");
     }
 
 }
