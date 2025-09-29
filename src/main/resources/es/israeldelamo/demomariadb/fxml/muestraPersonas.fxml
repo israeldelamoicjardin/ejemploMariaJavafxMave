@@ -3,16 +3,44 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.VBox?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <VBox alignment="CENTER" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.israeldelamo.demomariadb.controladores.ControladorMuestraPersonas">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <MenuBar>
+     <menus>
+       <Menu mnemonicParsing="false" text="Archivo">
+         <items>
+           <MenuItem mnemonicParsing="false" text="Close" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Editar">
+         <items>
+           <MenuItem mnemonicParsing="false" text="Eliminar fila seleccionada" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Ayuda">
+         <items>
+           <MenuItem mnemonicParsing="false" onAction="#onAcercaDeClick" text="Acera de" />
+         </items>
+       </Menu>
+     </menus>
+   </MenuBar>
+   <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Lector de la tabla DNI" VBox.vgrow="NEVER">
+      <font>
+         <Font size="26.0" />
+      </font>
+   </Label>
 
     <Label fx:id="welcomeText" />
     <Button onAction="#onHelloButtonClick" text="_Actualiza">
@@ -23,9 +51,7 @@
 
       </graphic>
       <graphic>
-         <FontIcon accessibleText="Actualizar" fontSmoothingType="LCD"
-                   iconColor="#8a2d2d" iconLiteral="fa-recycle" iconSize="20"
-                   selectionEnd="2" selectionFill="#1b293c" styleClass="h2" />
+         <FontIcon accessibleText="Actualizar" fontSmoothingType="LCD" iconColor="#8a2d2d" iconLiteral="fa-recycle" iconSize="20" selectionEnd="2" selectionFill="#1b293c" styleClass="h2" />
       </graphic></Button>
    <TableView fx:id="tvDni" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="388.0" prefWidth="600.0" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
      <columns>
