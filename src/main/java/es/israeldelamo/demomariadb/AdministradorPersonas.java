@@ -66,8 +66,12 @@ public class AdministradorPersonas extends Application {
         stage.setTitle("Lista los datos de Maria");
         stage.setScene(scene);
         stage.show();
+
+        //un mensajito de bienvenida
         Alertas alertaInformacion = new Alertas();
-        alertaInformacion.mostrarInformacion("Bienvenido a la gestión de DNIs");
+        // esta linea seria monolingüe, la paso a bundle get key para que sea multi
+        //alertaInformacion.mostrarInformacion("Bienvenido a la gestión de DNIs");
+        alertaInformacion.mostrarInformacion(bundle.getString("TextoBienvenida"));
     }
 
 }
