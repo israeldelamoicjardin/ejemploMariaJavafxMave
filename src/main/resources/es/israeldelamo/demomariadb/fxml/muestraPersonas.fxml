@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
@@ -18,26 +17,29 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <MenuBar>
+   <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" useSystemMenuBar="true">
      <menus>
-       <Menu fx:id="miArchivo"  text="%Archivo">
+       <Menu fx:id="miArchivo" mnemonicParsing="true" text="%Archivo">
          <items>
-           <MenuItem  mnemonicParsing="false"  accelerator="Shortcut+S" onAction="#onArchivoCerrar" text="%Cerrar" />
+           <MenuItem accelerator="Shortcut+S" mnemonicParsing="false" onAction="#onArchivoCerrar" text="%Cerrar" />
          </items>
        </Menu>
-       <Menu mnemonicParsing="false" text="%Editar">
+       <Menu mnemonicParsing="true" text="%Editar">
          <items>
-           <MenuItem  accelerator="Shortcut+E" mnemonicParsing="false" onAction="#onEdicionEliminar" text="%Eliminar" />
+           <MenuItem accelerator="Shortcut+E" mnemonicParsing="false" onAction="#onEdicionEliminar" text="%Eliminar" />
          </items>
 
        </Menu>
-       <Menu mnemonicParsing="false" text="%Ayuda">
+       <Menu mnemonicParsing="true" text="%Ayuda">
          <items>
-           <MenuItem  accelerator="Shortcut+Y" mnemonicParsing="false" onAction="#onAcercaDeClick" text="Acera de" />
+           <MenuItem accelerator="Shortcut+Y" mnemonicParsing="false" onAction="#onAcercaDeClick" text="Acera de" />
          </items>
 
        </Menu>
      </menus>
+      <padding>
+         <Insets bottom="5.0" top="5.0" />
+      </padding>
    </MenuBar>
    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="%TituloApp" VBox.vgrow="NEVER">
       <font>
