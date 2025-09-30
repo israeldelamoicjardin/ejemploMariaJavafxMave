@@ -7,6 +7,7 @@
     <custom-resource-bundle>
       <file value="file://$PROJECT_DIR$/src/main/resources/textos.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/textos_en.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/textos_es.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/textos_eu.properties" />
       <base-name>textos</base-name>
     </custom-resource-bundle>

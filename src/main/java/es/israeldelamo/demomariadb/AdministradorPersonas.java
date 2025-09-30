@@ -8,7 +8,12 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
+
+
 
 /**
  * La clase principal que llama a las ventanas
@@ -38,12 +43,20 @@ public class AdministradorPersonas extends Application {
 //            throw new RuntimeException(e);
 //        }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(AdministradorPersonas.class.getResource("fxml/muestraPersonas.fxml"));
+        // Cargar el idioma seleccionado
+        Preferences prefs = Preferences.userNodeForPackage(AdministradorPersonas.class);
+        String idioma = prefs.get("textos", "es"); // Valor por defecto "es"
+        Locale locale = new Locale(idioma);
+        ResourceBundle bundle = ResourceBundle.getBundle("textos", locale);
+
+
+
+        //al cargar el fxml le pasamos también en bundle
+        FXMLLoader fxmlLoader = new FXMLLoader(AdministradorPersonas.class.getResource("fxml/muestraPersonas.fxml"),bundle);
         Scene scene = new Scene(fxmlLoader.load());
 
-
-        Image icono = new Image(Objects.requireNonNull(getClass().getResourceAsStream("imagenes/icono.png")));
         //ruta de la foto a poner en el logo de la ventanas stage.getIcons().add(imagen);
+        Image icono = new Image(Objects.requireNonNull(getClass().getResourceAsStream("imagenes/icono.png")));
         stage.getIcons().add(icono);
 
         //prevengo el aplastamiento

@@ -33,9 +33,6 @@ public class DaoDni {
 
             try{
                 conexion = new ConexionBBDD();
-
-
-
                 String consulta = "SELECT dni, nombre, apellidos FROM DNI";
                 PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
                 ResultSet rs = pstmt.executeQuery();
