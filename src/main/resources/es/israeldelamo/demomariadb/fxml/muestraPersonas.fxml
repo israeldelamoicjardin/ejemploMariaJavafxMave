@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
@@ -19,20 +20,22 @@
     </padding>
    <MenuBar>
      <menus>
-       <Menu mnemonicParsing="false" text="%Archivo">
+       <Menu fx:id="miArchivo"  text="%Archivo">
          <items>
-           <MenuItem mnemonicParsing="false" text="%Cerrar" />
+           <MenuItem  mnemonicParsing="false"  accelerator="Shortcut+S" onAction="#onArchivoCerrar" text="%Cerrar" />
          </items>
        </Menu>
        <Menu mnemonicParsing="false" text="%Editar">
          <items>
-           <MenuItem mnemonicParsing="false" text="%Eliminar" />
+           <MenuItem  accelerator="Shortcut+E" mnemonicParsing="false" onAction="#onEdicionEliminar" text="%Eliminar" />
          </items>
+
        </Menu>
        <Menu mnemonicParsing="false" text="%Ayuda">
          <items>
-           <MenuItem mnemonicParsing="false" onAction="#onAcercaDeClick" text="Acera de" />
+           <MenuItem  accelerator="Shortcut+Y" mnemonicParsing="false" onAction="#onAcercaDeClick" text="Acera de" />
          </items>
+
        </Menu>
      </menus>
    </MenuBar>
@@ -43,7 +46,7 @@
    </Label>
 
     <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="%Actualizar">
+    <Button onAction="#onActualizarButton" text="%Actualizar">
       <tooltip>
          <Tooltip text="Refresca la tabla inferior" />
       </tooltip>
