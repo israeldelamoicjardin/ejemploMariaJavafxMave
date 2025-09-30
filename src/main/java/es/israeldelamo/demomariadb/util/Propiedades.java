@@ -25,7 +25,7 @@ public class Propiedades {
             props.load(input);
         } catch (Exception e) {
 
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
 
     }
