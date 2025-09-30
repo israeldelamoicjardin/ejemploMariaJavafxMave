@@ -36,14 +36,14 @@
        </Menu>
      </menus>
    </MenuBar>
-   <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Lector de la tabla DNI" VBox.vgrow="NEVER">
+   <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="%TituloApp" VBox.vgrow="NEVER">
       <font>
          <Font size="26.0" />
       </font>
    </Label>
 
     <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="_Actualiza">
+    <Button onAction="#onHelloButtonClick" text="%Actualizar">
       <tooltip>
          <Tooltip text="Refresca la tabla inferior" />
       </tooltip>
@@ -56,9 +56,9 @@
    <TableView fx:id="tvDni" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="388.0" prefWidth="600.0" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
      <columns>
 
-         <TableColumn fx:id="tcDni" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="Dni" />
-         <TableColumn fx:id="tcNombre" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="Nombre" />
-         <TableColumn fx:id="tcApellidos" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="Apellidos" />
+         <TableColumn fx:id="tcDni" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="%Dni" />
+         <TableColumn fx:id="tcNombre" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="%Nombre" />
+         <TableColumn fx:id="tcApellidos" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="%Apellidos" />
      </columns>
    </TableView>
 </VBox>
