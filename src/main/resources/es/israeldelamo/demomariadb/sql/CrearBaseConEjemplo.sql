@@ -6,5 +6,8 @@ create table if not exists DNI
     );
 
 insert into DNI.DNI (DNI, Nombre, Apellidos)
-values ("100","Israel","De Lamo"),
-       ("99","Alberto","García");
+values ("1","Juan","Perez"),
+       ("2","Perico","GNZ."),
+       ("3","Andres","RDGZ."),
+       ("4","Ines","GCIA."),
+       ("5","Alberto","Mateos");
