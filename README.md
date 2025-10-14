@@ -53,7 +53,9 @@ Este script crea la estructura necesaria para que el proyecto funcione correctam
 
 ```bash
 mvn clean package
-java -jar target/tu-proyecto.jar
+java -jar .demoMARIADB-1.0-SNAPSHOT.jar
+
+También se puede ejecutar dando doble click sobre el archivo si tenemos Oracle JDK instalado.
 ```
 
 ---
