@@ -42,7 +42,7 @@ import java.util.concurrent.CompletableFuture;
          * @throws java.sql.SQLException Hay que controlar errores de SQL
          */
         public ConexionBBDD() throws SQLException {
-            Properties connConfig = new Properties();
+            Properties connConfig;
             // los parámetros de la conexion leidos desde fuera
             // nada de dejar en el repo las credenciales
             String user = Propiedades.getValor("user");
@@ -99,7 +99,7 @@ import java.util.concurrent.CompletableFuture;
 
             return CompletableFuture.supplyAsync(() -> {
                 try {
-                    Properties connConfig = new Properties();
+                    Properties connConfig;
                     // los parámetros de la conexion leidos desde fuera
                     // nada de dejar en el repo las credenciales
                     String user = Propiedades.getValor("user");
