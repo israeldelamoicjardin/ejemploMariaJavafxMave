@@ -20,17 +20,17 @@ import java.util.prefs.Preferences;
  */
 public class AdministradorPersonas extends Application {
     /**
-     * Método inicial de las JavaFX
-     * @param stage
-     * @throws IOException
+     * Procedimiento inicial de las JavaFX
+     * @param stage la ventana de trabajo
+     * @throws IOException puede no encontrar el fxml
      */
     @Override
     public void start(Stage stage) throws IOException {
 
 //
-//        //prueba de conexion a la bbdd
+//        //prueba de conexión a la bbdd
 //        try {
-//            // creo la conexion a ver si tira
+//            // creo la conexión a ver si tira
 //            ConexionBBDD conexioPrueba= new ConexionBBDD();
 //            //creo una persona de prueba
 //            // ModeloPersona personaPrueba = new ModeloPersona("69696969-Z");
